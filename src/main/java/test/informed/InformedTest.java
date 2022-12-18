@@ -1,6 +1,7 @@
 package test.informed;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import soni.informed.Level1;
@@ -14,6 +15,8 @@ import soni.informed.Level3;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 public class InformedTest {
     public static WebDriver driver;
@@ -44,6 +47,7 @@ public class InformedTest {
         List<WebElement> AllCheckboxes =  driver.findElements(By.xpath("//input[@type='checkbox']"));
         for(WebElement boxes:AllCheckboxes) {
             boxes.click();
+            boxes.isSelected();
         }
 
         // Radio button click
@@ -66,23 +70,27 @@ public class InformedTest {
 
         // Loading Level3 page
         driver.get("http://127.0.0.1:5500/level-3.html");
-        driver.manage().window().maximize(); // Maximizing window
         Level3 l3 = new Level3(driver); // Object created
+
 
         WebElement form1 = new WebDriverWait(driver, Duration.ofSeconds(30)).until(
                 ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='text']")));
+        // form1 WebElement used to locate and load page by FindBy annotation, no other use
+        // because the other WebElement forms is dynamic it can't be used in FindBy
         for (int i=1;i<=4;i++) {
+            // Explicit wait used to load the page
             WebElement forms = new WebDriverWait(driver, Duration.ofSeconds(30)).until(
                     ExpectedConditions.elementToBeClickable(By.xpath("/html/body/form/input["+i+"]")));
             forms.sendKeys("Hello");
             System.out.println(forms.isDisplayed());
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Implicit wait also used for to load the page
         }
         //Submit forms
         WebElement subMit = driver.findElement(new By.ByTagName("button"));
         subMit.submit();
         driver.switchTo().alert().accept();
 
-        Thread.sleep(20000);
+        Thread.sleep(10000);
         driver.quit();
     }
 }
