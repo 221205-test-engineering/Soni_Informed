@@ -1,6 +1,5 @@
 package test.informed;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,18 +24,21 @@ public class InformedTest {
 
         // Loading level1 page
         driver.get("file:///D:/Revature/Soni_Informed/src/main/resources/level-1.html");
-        Level1 l1 = new Level1(driver);
-        System.out.println(l1.driver.getCurrentUrl());
+        new Level1(driver);
+
         WebElement inputType = driver.findElement(By.id("nameInput"));
         String inputText = driver.findElement(By.id("randomString")).getText();
         inputType.sendKeys(inputText);
         inputType.submit();
+        if(driver.switchTo().alert().getText().contains("SUCCESS")){
+            System.out.println("Level1 SUCCESS");
+        }else System.out.println("Level1 FAILED");
         driver.switchTo().alert().accept();
 
         // Loading level2 page
         driver.get("file:///D:/Revature/Soni_Informed/src/main/resources/level-2.html");
-        Level2 l2 = new Level2(driver);
-        System.out.println(l2.driver.getCurrentUrl());
+        new Level2(driver);
+
         // Selecting from dropdown menu
         WebElement selectOne = driver.findElement(By.xpath("/html/body/dl/dd[1]"));
         Select selectNum = new Select(driver.findElement(By.name("input1")));
@@ -46,7 +48,7 @@ public class InformedTest {
         List<WebElement> AllCheckboxes =  driver.findElements(By.xpath("//input[@type='checkbox']"));
         for(WebElement boxes:AllCheckboxes) {
             boxes.click();
-            boxes.isSelected();
+//            boxes.isSelected();
         }
 
         // Radio button click
@@ -65,33 +67,33 @@ public class InformedTest {
         String buttonNum = driver.findElement(By.xpath("/html/body/dl/dd[5]")).getText();
         WebElement buttons = driver.findElement(By.xpath("/html/body/form/button["+buttonNum+"]"));
         buttons.submit();
+        if(driver.switchTo().alert().getText().contains("SUCCESS")){
+            System.out.println("Level2 SUCCESS");
+        }else System.out.println("Level2 FAILED");
         driver.switchTo().alert().accept();
 
         // Loading Level3 page
         driver.get("file:///D:/Revature/Soni_Informed/src/main/resources/level-3.html");
-        Level3 l3 = new Level3(driver); // Object created
+        new Level3(driver); // Object created
 
-        System.out.println(l3.driver.getCurrentUrl());
-        WebElement form1 = new WebDriverWait(driver, Duration.ofSeconds(30)).until(
-                ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='text']")));
-        // form1 WebElement used to locate and load page by FindBy annotation, no other use
-        // because the other WebElement forms is dynamic it can't be used in FindBy
-        for (int i=1;i<=4;i++) {
+        List<WebElement> form1 = driver.findElements(By.xpath("//input[@type='text']"));
+        for (int i=1; i<=4; i++) {
             // Explicit wait used to load the page
             WebElement forms = new WebDriverWait(driver, Duration.ofSeconds(30)).until(
-                    ExpectedConditions.elementToBeClickable(By.xpath("/html/body/form/input["+i+"]")));
+                    ExpectedConditions.elementToBeClickable(By.xpath("/html/body/form/input[" + i + "]")));
             forms.sendKeys("Hello");
             System.out.println(forms.isDisplayed());
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20)); // Implicit wait also used for to load the page
         }
-        //Submit forms
-        WebElement subMit = driver.findElement(new By.ByTagName("button"));
-        subMit.submit();
+        //Submit forms and message printing
+        driver.findElement(new By.ByTagName("button")).submit();
+        if(driver.switchTo().alert().getText().contains("SUCCESS")){
+            System.out.println("Level3 SUCCESS");
+        }else System.out.println("Level3 FAILED");
         driver.switchTo().alert().accept();
 
         // Loading level4 page
         driver.get("file:///D:/Revature/Soni_Informed/src/main/resources/level-4.html");
-        Level4 l4 = new Level4(driver);
+        new Level4(driver);
 
         WebElement longText = driver.findElement(By.xpath("//input[@type='text']"));
         for(int i=0; i<100; i++){
@@ -100,12 +102,11 @@ public class InformedTest {
         }
         longText.submit();
         if(driver.switchTo().alert().getText().contains("SUCCESS")){
-            System.out.println("SUCCESS");
-        }else System.out.println("FAILED");
+            System.out.println("Level4 SUCCESS");
+        }else System.out.println("Level4 FAILED");
         driver.switchTo().alert().accept();
 
-
-        Thread.sleep(10000);
+        Thread.sleep(1000);
         driver.close();
         driver.quit();
     }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.List;
 
 public class Level3 {
     public WebDriver driver;
@@ -15,10 +16,9 @@ public class Level3 {
         this.driver=driver;
         PageFactory.initElements(driver, this);
     }
-    // Forms filling
+
+    // Find element xpath
     @FindBy(xpath = "//input[@type='text']")
-    WebElement form1;
-    // Forms submit
-    @FindBy(tagName="button")
-    WebElement subMit;
+    List<WebElement> form1;
+
 }

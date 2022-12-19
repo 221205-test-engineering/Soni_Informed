@@ -1,5 +1,6 @@
 package soni.informed;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +13,6 @@ public class Level1 {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
     @FindBy(id = "randomString")
     String inputText;
     @FindBy(id = "nameInput")
