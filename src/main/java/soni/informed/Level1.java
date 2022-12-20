@@ -13,8 +13,17 @@ public class Level1 {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-    @FindBy(id = "randomString")
-    String inputText;
+
+    public void nameInput(){
+        String inputText = driver.findElement(By.id("randomString")).getText();
+        inputType.sendKeys(inputText);
+        inputType.submit();
+        if(driver.switchTo().alert().getText().contains("SUCCESS")){
+            System.out.println("Level1 SUCCESS");
+        }else System.out.println("Level1 FAILED");
+        driver.switchTo().alert().accept();
+    }
+
     @FindBy(id = "nameInput")
-    WebElement inputType;
+    public WebElement inputType;
 }
