@@ -19,11 +19,12 @@ public class Level3 {
         WebElement[] inputs = {input2, input2, input3, input4};
         for(WebElement input:inputs){
             new FluentWait<WebDriver>(driver)
-                    .withTimeout(Duration.ofSeconds(30)) // how long in total to wait for the page/DOM to load
-                    .pollingEvery(Duration.ofNanos(1)) // during those 10 seconds - we are looking at the DOM every 2 seconds
-                    .ignoring(ElementNotInteractableException.class) // if any exception occurs - we ignore it and keep polling
+                    .withTimeout(Duration.ofSeconds(30)) // total to wait for the page/DOM to load
+                    .pollingEvery(Duration.ofNanos(2)) // looking at the DOM every 2 seconds
+                    .ignoring(ElementNotInteractableException.class) // if ElementNotInteractableException occurs - will ignore, and keeps polling
                     .until(ExpectedConditions.visibilityOf(input));
-                    input.sendKeys("Soni");
+
+            input.sendKeys("Soni");
         }
         //Submit forms and message printing
         button.submit();
