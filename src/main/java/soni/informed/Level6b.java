@@ -13,7 +13,7 @@ public class Level6b {
     }
     public void approvalGate1(){
         button.click();
-
+        button.isEnabled();
         if(driver.switchTo().alert().getText().contains("GATE")){
             System.out.println("Level6 Success");
         }else{
