@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -23,7 +22,7 @@ public class Level10 {
             File f = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(f, new File("D:/Revature/Soni_Informed/src/main/resources/screenshot01.png"));
             inputFile.sendKeys(f.getAbsolutePath());
-            Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+            Wait<WebDriver> wait = new FluentWait<>(driver)
                     .withTimeout(Duration.ofSeconds(60))
                     .pollingEvery(Duration.ofSeconds(2))
                     .ignoring(NoAlertPresentException.class);

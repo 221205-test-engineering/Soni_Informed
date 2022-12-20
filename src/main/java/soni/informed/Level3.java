@@ -16,9 +16,9 @@ public class Level3 {
         PageFactory.initElements(driver, this);
     }
     public void flickeringInput(){
-        WebElement[] inputs = {input2, input2, input3, input4};
+        WebElement[] inputs = {input1, input2, input3, input4};
         for(WebElement input:inputs){
-            new FluentWait<WebDriver>(driver)
+            new FluentWait<>(driver)
                     .withTimeout(Duration.ofSeconds(30)) // total to wait for the page/DOM to load
                     .pollingEvery(Duration.ofNanos(2)) // looking at the DOM every 2 seconds
                     .ignoring(ElementNotInteractableException.class) // if ElementNotInteractableException occurs - will ignore, and keeps polling
