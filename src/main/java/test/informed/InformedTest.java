@@ -36,6 +36,20 @@ public class InformedTest {
         Level5 l5 = new Level5(driver);
         l5.hundredCharLong();
 
+        // Level 6a loading
+        driver.get("file:///D:/Revature/Soni_Informed/src/main/resources/level-6a.html");
+        Level6a l6a = new Level6a(driver);
+        l6a.checkBox();
+
+        // Level 6b loading
+        driver.get("file:///D:/Revature/Soni_Informed/src/main/resources/level-6b.html");
+        Level6b l6b = new Level6b(driver);
+        l6b.approvalGate1();
+
+        // Level 6c loading
+        driver.get("file:///D:/Revature/Soni_Informed/src/main/resources/level-6c.html");
+        Level6c l6c = new Level6c(driver);
+        l6c.approvalGate2();
 
         // Level 7 loading
         driver.get("file:///D:/Revature/Soni_Informed/src/main/resources/level-7.html");
